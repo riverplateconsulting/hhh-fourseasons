@@ -38,6 +38,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 @media (prefers-reduced-motion: no-preference) { html.smooth { scroll-behavior: smooth; } }
 body { background: var(--paper); color: var(--ink); font-family: var(--serif-b); font-size: 18px; line-height: 1.5; letter-spacing: 0.2px; }
@@ -49,7 +50,7 @@ img { display: block; max-width: 100%; }
 .label { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--charcoal); }
 .display {
   font-family: var(--serif-d); font-weight: 300;
-  font-size: clamp(40px, 5.6vw, 88px); line-height: 1.04; letter-spacing: -0.3px;
+  font-size: clamp(40px, 5.6vw, 88px); line-height: 1.12; letter-spacing: -0.3px;
   color: var(--ink); text-wrap: balance;
 }
 .display .gold { color: var(--gold); font-style: italic; }
@@ -89,7 +90,7 @@ img { display: block; max-width: 100%; }
 .nav a { font-family: var(--sans); font-weight: 500; font-size: 11.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: opacity 300ms; }
 .nav a:hover { opacity: 0.55; }
 .nav .demo { border: 1px solid currentColor; padding: 10px 18px; }
-@media (max-width: 900px) { .nav a:not(.demo) { display: none; } }
+@media (max-width: 900px) { .nav { gap: 14px; } .nav a { font-size: 10px; letter-spacing: 1.5px; } }
 
 /* ════════════════════════════════════════════════════════════════════════
    SECTION SYSTEM
@@ -98,9 +99,10 @@ img { display: block; max-width: 100%; }
 .sec.stone { background: var(--stone); }
 .sec.off { background: var(--offwhite); }
 .sec.ink { background: var(--ink); color: #fff; }
-.sec.ink .display, .sec.ink .lede, .sec.ink .body { color: #fff; }
+.sec.ink .display, .sec.ink .lede, .sec.ink .body, .sec.ink .q { color: #fff; }
 .sec.ink .eyebrow { color: rgba(255,255,255,0.7); }
 .sec.ink .label { color: rgba(255,255,255,0.6); }
+.sec.stone .cap, .sec.stone .ba .col li { color: var(--charcoal); }
 .wrap { max-width: 1200px; margin: 0 auto; }
 .rule { height: 1px; background: var(--rule); border: 0; }
 
@@ -109,10 +111,11 @@ img { display: block; max-width: 100%; }
 .hero .photo { position: absolute; inset: 0; z-index: 0; }
 .hero .photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform 9s var(--ease); }
 .hero.shown .photo img { transform: scale(1); }
-.hero .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.18) 100%); }
+.hero .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.32) 100%); }
 .hero .htext { position: relative; z-index: 2; color: #fff; padding: 0 var(--gut) clamp(64px, 12vh, 130px); width: 100%; }
 .hero .eyebrow, .hero .cap { color: rgba(255,255,255,0.86); }
 .hero .place, .hero .display { color: #fff; }
+.hero .display .gold { text-shadow: 0 1px 14px rgba(0,0,0,0.55); }
 .hero .util { display: flex; gap: 26px; margin-top: 34px; flex-wrap: wrap; }
 .hero .util a { color: #fff; border-color: rgba(255,255,255,0.6); }
 
@@ -128,11 +131,6 @@ img { display: block; max-width: 100%; }
 /* Centered statement */
 .center { text-align: center; max-width: 980px; margin: 0 auto; }
 .center .lede { margin: 30px auto 0; }
-
-/* Generic grid */
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
-.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
-.grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 
 /* Section heading block */
 .shead { margin-bottom: clamp(40px, 6vh, 80px); max-width: 60ch; }
@@ -160,7 +158,7 @@ img { display: block; max-width: 100%; }
 .ba .col h4 { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
 .ba .col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .ba .col li { font-family: var(--serif-b); font-size: 16px; color: var(--graphite); line-height: 1.45; }
-.ba .col.before li { color: var(--mid); text-decoration: line-through; text-decoration-color: var(--rule); }
+.ba .col.before li { color: var(--mid); text-decoration: line-through; text-decoration-color: var(--mid); }
 .ba .arrow { align-self: center; text-align: center; font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); }
 .ba .arrow .t { font-family: var(--serif-d); font-style: italic; font-size: 22px; color: var(--gold); display: block; margin-top: 8px; }
 
@@ -177,12 +175,15 @@ img { display: block; max-width: 100%; }
 .qr-route.dim { opacity: 0.34; }
 .qr-route .rt { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
 .qr-route .rb { font-family: var(--serif-b); font-size: 15px; color: var(--graphite); line-height: 1.5; }
-.qr-badge { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.qr-badge { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--charcoal); }
 
 /* Eight tabs */
 .tabs8 { border: 1px solid var(--rule); }
-.tabs8 .phs { display: grid; grid-template-columns: repeat(3,1fr); }
+.tabs8 .phs { display: grid; grid-template-columns: repeat(8,1fr); }
 .tabs8 .ph { padding: 14px 18px; font-family: var(--sans); font-weight: 700; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+.tabs8 .ph.p1 { grid-column: span 4; }
+.tabs8 .ph.p2 { grid-column: span 2; }
+.tabs8 .ph.p3 { grid-column: span 2; }
 .tabs8 .ph:last-child { border-right: none; }
 .tabs8 .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .tabs8 .cell { padding: 22px 18px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); transition: background 300ms; cursor: default; }
@@ -195,8 +196,9 @@ img { display: block; max-width: 100%; }
 .tabs8 .cell .cd { font-family: var(--serif-b); font-size: 13.5px; color: var(--graphite); margin-top: 6px; line-height: 1.45; }
 
 /* Two-worlds dual frames */
-.worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.world { border: 1px solid var(--rule); background: var(--paper); }
+.worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+.world { border: 1px solid var(--rule); background: var(--paper); display: flex; flex-direction: column; }
+.world .wb { flex: 1; }
 .world .wh { padding: 16px 22px; border-bottom: 1px solid var(--rule); font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); display: flex; justify-content: space-between; }
 .world .wb { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
 .world .row { display: flex; justify-content: space-between; align-items: center; font-family: var(--serif-b); font-size: 15px; color: var(--graphite); padding-bottom: 11px; border-bottom: 1px solid var(--rule); }
@@ -204,7 +206,7 @@ img { display: block; max-width: 100%; }
 .world .row .t { font-family: var(--sans); font-size: 11px; letter-spacing: 1px; color: var(--mid); }
 .world .tiles { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
 .world .tile { border: 1px solid var(--rule); padding: 16px 10px; text-align: center; font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--graphite); }
-.world .pill { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 6px 12px; }
+.world .pill { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--charcoal); border: 1px solid var(--charcoal); padding: 6px 12px; }
 
 /* KPI row (evidencia) */
 .kpis { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--rule); margin-top: 40px; }
@@ -222,8 +224,8 @@ img { display: block; max-width: 100%; }
 .pillar .pa { font-family: var(--sans); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-top: 10px; }
 
 /* Archetype cards */
-.arch { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
-.acard { border: 1px solid var(--rule); background: var(--paper); display: flex; flex-direction: column; }
+.arch { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; align-items: stretch; }
+.acard { border: 1px solid var(--rule); background: var(--paper); display: flex; flex-direction: column; height: 100%; }
 .acard .ap { aspect-ratio: 3/4; overflow: hidden; }
 .acard .ap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
 .acard:hover .ap img { transform: scale(1.05); }
@@ -234,7 +236,7 @@ img { display: block; max-width: 100%; }
 
 /* Steps + tiers (servicio) */
 .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(24px,3vw,52px); margin-bottom: clamp(48px,7vh,90px); }
-.step .sn { font-family: var(--serif-d); font-style: italic; font-size: 40px; color: var(--gold); }
+.step .sn { font-family: var(--serif-d); font-style: italic; font-size: 40px; color: var(--charcoal); }
 .step .st { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); margin: 12px 0 8px; }
 .step .sb { font-family: var(--serif-b); font-size: 15px; color: var(--graphite); line-height: 1.55; }
 .tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; align-items: stretch; }
@@ -248,7 +250,7 @@ img { display: block; max-width: 100%; }
 
 /* Attestation quote */
 .attest { max-width: 860px; margin: 0 auto; text-align: center; }
-.attest .q { font-family: var(--serif-d); font-weight: 300; font-size: clamp(28px,3.4vw,52px); line-height: 1.18; color: var(--ink); }
+.attest .q { font-family: var(--serif-d); font-weight: 300; font-size: clamp(28px,3.4vw,52px); line-height: 1.24; color: var(--ink); }
 .attest .sig { font-family: var(--sans); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); margin-top: 18px; }
 .attest .two-q { display: flex; flex-direction: column; gap: 40px; }
 
@@ -275,13 +277,19 @@ img { display: block; max-width: 100%; }
    RESPONSIVE
    ════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .split, .grid2, .grid3, .worlds, .pillars, .steps, .tiers, .archi { grid-template-columns: 1fr; }
+  .split, .worlds, .pillars, .steps, .tiers, .archi { grid-template-columns: 1fr; }
   .split.right .copy { order: 1; } .split.right .art { order: 2; }
   .tabs8 .grid { grid-template-columns: repeat(2,1fr); }
   .tabs8 .cell:nth-child(4n) { border-right: 1px solid var(--rule); }
   .tabs8 .cell:nth-child(2n) { border-right: none; }
   .kpis, .arch { grid-template-columns: repeat(2,1fr); }
   .ba { grid-template-columns: 1fr; } .ba .arrow { display: none; }
+  .world .tiles { grid-template-columns: repeat(2,1fr); }
+  .world .tile { min-width: 0; }
+  .qr-routes { grid-template-columns: 1fr; }
+  .qr-route:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+  .tlink { padding-top: 11px; padding-bottom: 11px; }
+  .foot a { padding: 13px 0; }
   .foot .cols { grid-template-columns: 1fr; gap: 32px; }
 }
 
@@ -313,7 +321,7 @@ img { display: block; max-width: 100%; }
 
 <!-- ═══════════════ 1 · PORTADA ═══════════════ -->
 <section class="sec hero" id="s1" data-label="Portada">
-  <div class="photo"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&auto=format&fit=crop&q=80" alt="Hotel de lujo al atardecer"></div>
+  <div class="photo"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&auto=format&fit=crop&q=80" alt=""></div>
   <div class="scrim"></div>
   <div class="htext">
     <div class="eyebrow rv">Misión Digital · Montevideo · Edición Hospitalidad · 2026</div>
@@ -336,7 +344,7 @@ img { display: block; max-width: 100%; }
     <div class="meter rv" data-d style="--dd:.5s; --w:65%;"><div class="top"><span class="nm">Pedidos perdidos entre turnos</span><span class="vl">65%</span></div><div class="bar"></div></div>
     <div class="meter rv" data-d style="--dd:.6s; --w:90%;"><div class="top"><span class="nm">Huéspedes que rechazan apps</span><span class="vl">90%</span></div><div class="bar"></div></div>
   </div>
-  <div class="art rv"><img src="https://images.unsplash.com/photo-1551038247-3d9af20df552?w=1920&auto=format&fit=crop&q=80" alt="Pasillo de hotel"><div class="tag"><span class="cap">Detrás del telón</span></div></div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1551038247-3d9af20df552?w=1920&auto=format&fit=crop&q=80" alt=""><div class="tag"><span class="cap">Detrás del telón</span></div></div>
 </section>
 
 <!-- ═══════════════ 3 · EL CAMBIO ═══════════════ -->
@@ -346,11 +354,11 @@ img { display: block; max-width: 100%; }
     <h2 class="display rv" data-d style="--dd:.1s;">Un código por habitación, <span style="font-style:italic;">impreso una vez</span>.</h2>
     <div class="ba rv" data-d style="--dd:.3s;">
       <div class="col before"><h4>Antes</h4><ul><li>Planillas en clipboards</li><li>Radio entre turnos</li><li>Checklists a lápiz</li><li>Sin auditoría</li></ul></div>
-      <div class="arrow">Antes a después<span class="t">02 min</span></div>
+      <div class="arrow">En vivo<span class="t">02 min</span></div>
       <div class="col"><h4>Después</h4><ul><li>El personal escanea su lista</li><li>El huésped, un portal sin descargas</li><li>Sello de fecha, hora y foto</li><li>Cierre firmado al PMS, solo</li></ul></div>
     </div>
   </div>
-  <div class="art rv"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&auto=format&fit=crop&q=80" alt="Recepción de hotel"></div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&auto=format&fit=crop&q=80" alt=""></div>
 </section>
 
 <!-- ═══════════════ 4 · DEFINICIÓN ═══════════════ -->
@@ -361,8 +369,8 @@ img { display: block; max-width: 100%; }
     <p class="lede rv" data-d style="--dd:.25s;">La plataforma reconoce quién escanea, personal o huésped, y sirve la interfaz exacta en menos de 200 milisegundos. El mismo papel, dos lecturas.</p>
     <div class="qr-stage rv" data-d style="--dd:.4s;">
       <div class="qr-glyph"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="6" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="13" y="13" width="12" height="12" fill="#000"/><rect x="68" y="6" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="75" y="13" width="12" height="12" fill="#000"/><rect x="6" y="68" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="13" y="75" width="12" height="12" fill="#000"/><g fill="#000"><rect x="42" y="10" width="6" height="6"/><rect x="54" y="10" width="6" height="6"/><rect x="42" y="22" width="6" height="6"/><rect x="42" y="42" width="6" height="6"/><rect x="54" y="48" width="6" height="6"/><rect x="66" y="42" width="6" height="6"/><rect x="78" y="54" width="6" height="6"/><rect x="42" y="66" width="6" height="6"/><rect x="60" y="66" width="6" height="6"/><rect x="66" y="78" width="6" height="6"/><rect x="84" y="84" width="6" height="6"/></g></svg></div>
-      <div class="qr-toggle"><button class="on" data-r="personal">Soy personal</button><button data-r="huesped">Soy huésped</button></div>
-      <div class="qr-badge" id="qrBadge">Resuelto en 184 ms</div>
+      <div class="qr-toggle"><button class="on" data-r="personal" aria-pressed="true">Soy personal</button><button data-r="huesped" aria-pressed="false">Soy huésped</button></div>
+      <div class="qr-badge" id="qrBadge" aria-live="polite">Resuelto en 184 ms</div>
       <div class="qr-routes">
         <div class="qr-route" id="rtPersonal"><div class="rt">Panel · Operación</div><div class="rb">Tu lista de tareas con tu rol, sellada con hora y firma.</div></div>
         <div class="qr-route dim" id="rtHuesped"><div class="rt">Portal · Huésped</div><div class="rb">Todo el hotel, sin descargar nada. Tu idioma, tu reserva.</div></div>
@@ -404,7 +412,7 @@ img { display: block; max-width: 100%; }
     <p class="body rv" data-d style="--dd:.25s; margin-top:24px;">Un código permanente, impreso una vez, con un ID único e historia infinita. Escaneá una vez, datos cargados. Cada manual, en cada habitación, sin conexión. El pase no caduca: vive con la propiedad.</p>
     <p class="cap rv" data-d style="--dd:.4s; margin-top:26px;">Puerta 408 · Suite Frente al Mar · UY26H00000408215103</p>
   </div>
-  <div class="art rv"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80" alt="Puerta de suite"><div class="tag"><span class="cap">El pase, en la puerta</span></div></div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80" alt=""><div class="tag"><span class="cap">El pase, en la puerta</span></div></div>
 </section>
 
 <!-- ═══════════════ 7 · OCHO PESTAÑAS ═══════════════ -->
@@ -412,7 +420,7 @@ img { display: block; max-width: 100%; }
   <div class="wrap">
     <div class="shead rv"><div class="eyebrow">Tu sistema de archivo, una pestaña a la vez</div><h2 class="display">Ocho pestañas, una habitación, cero papel.</h2></div>
     <div class="tabs8 rv" data-d style="--dd:.15s;">
-      <div class="phs"><div class="ph">Identificar · I a IV</div><div class="ph">Medir · V a VI</div><div class="ph">Cerrar · VII a VIII</div></div>
+      <div class="phs"><div class="ph p1">Identificar · I a IV</div><div class="ph p2">Medir · V a VI</div><div class="ph p3">Cerrar · VII a VIII</div></div>
       <div class="grid">
         <div class="cell"><div class="rn">I</div><div class="cn">Cliente</div><div class="cd">La cuenta que da contexto.</div></div>
         <div class="cell"><div class="rn">II</div><div class="cn">Orden de Trabajo</div><div class="cd">El alcance, con W-número.</div></div>
@@ -420,7 +428,7 @@ img { display: block; max-width: 100%; }
         <div class="cell"><div class="rn">IV</div><div class="cn">Documentación</div><div class="cd">Fotos y adjuntos, sin conexión.</div></div>
         <div class="cell"><div class="rn">V</div><div class="cn">Medidas</div><div class="cd">Unidad, foto y rango.</div></div>
         <div class="cell"><div class="rn">VI</div><div class="cn">Verificación</div><div class="cd">Cada Sí registrado.</div></div>
-        <div class="cell"><div class="rn">VII</div><div class="cn">Intervenciones</div><div class="cd">Las dos atestaciones.</div></div>
+        <div class="cell"><div class="rn">VII</div><div class="cn">Intervenciones</div><div class="cd">Las dos confirmaciones.</div></div>
         <div class="cell"><div class="rn">VIII</div><div class="cn">Firma</div><div class="cd">Envío al huésped, piso y PMS.</div></div>
       </div>
     </div>
@@ -436,13 +444,13 @@ img { display: block; max-width: 100%; }
     <p class="body rv" data-d style="--dd:.25s; margin-top:24px;">Orden W-4082, Hab. 408, Suite Frente al Mar. El Pase abre la habitación en menos de 200 ms, dos preguntas antes de cerrar, firma en segundos. Del lado del huésped: un portal sin descargas, toallas extra en ocho minutos.</p>
     <div class="rv" data-d style="--dd:.4s; margin-top:28px;"><a class="btn ghost" href="#s4">Elegí tu rol</a></div>
   </div>
-  <div class="art rv"><img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1920&auto=format&fit=crop&q=80" alt="Huésped con teléfono"><div class="tag"><span class="cap">En vivo · W-4082</span></div></div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1920&auto=format&fit=crop&q=80" alt=""><div class="tag"><span class="cap">En vivo · W-4082</span></div></div>
 </section>
 
 <!-- ═══════════════ 9 · ATESTACIONES ═══════════════ -->
 <section class="sec ink" id="s9" data-label="Atestaciones">
   <div class="wrap attest">
-    <div class="eyebrow rv" style="text-align:center;">Las dos atestaciones</div>
+    <div class="eyebrow rv" style="text-align:center;">Las dos confirmaciones</div>
     <div class="two-q" style="margin-top:30px;">
       <div class="rv" data-d style="--dd:.15s;"><p class="q">"La habitación está lista."</p><p class="sig" style="color:rgba(255,255,255,.6)">Sí · firmado por Carla M. · 11:42 · 22.05.2026</p></div>
       <div class="rv" data-d style="--dd:.35s;"><p class="q">"La habitación es <span style="font-style:italic;color:var(--gold)">segura</span> para entregar."</p><p class="sig" style="color:rgba(255,255,255,.6)">Sí · firmado por Carla M. · 11:43 · 22.05.2026</p></div>
@@ -484,7 +492,7 @@ img { display: block; max-width: 100%; }
       <div class="kpi rv" data-d style="--dd:.1s;"><div class="n" data-count="60" data-suf="%">0%</div><div class="l">Menos tiempo admin.</div><div class="s">12 propiedades · Q4 2025</div></div>
       <div class="kpi rv" data-d style="--dd:.2s;"><div class="n" data-count="4" data-suf=" min">0 min</div><div class="l">Desde 22 min</div><div class="s">1.847 solicitudes · abril 2026</div></div>
       <div class="kpi rv" data-d style="--dd:.3s;"><div class="n" data-count="0" data-suf="">0</div><div class="l">Apps por diseño</div><div class="s">Cero descargas</div></div>
-      <div class="kpi rv" data-d style="--dd:.4s;"><div class="n" data-count="30" data-suf="%">0%</div><div class="l">Menos costos</div><div class="s">+500 instalaciones</div></div>
+      <div class="kpi rv" data-d style="--dd:.4s;"><div class="n" data-count="30" data-suf="%">0%</div><div class="l">Menos costos</div><div class="s">vs. proceso en papel</div></div>
     </div>
     <p class="cap rv" data-d style="--dd:.5s; margin-top:24px;">No reemplazamos tu PMS ni competimos con ALICE o HelloShift. SLA 99.9% · P1 en 30 min · 24/7.</p>
   </div>
@@ -495,10 +503,10 @@ img { display: block; max-width: 100%; }
   <div class="wrap">
     <div class="shead rv"><div class="eyebrow">Cuatro arquetipos, una plataforma</div><h2 class="display">Cuatro hoteles distintos. <span style="font-style:italic;">Un mismo QR.</span></h2></div>
     <div class="arch">
-      <div class="acard rv" data-d style="--dd:.1s;"><div class="ap"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80" alt="Hotel boutique"></div><div class="ai"><div class="an">Boutique</div><div class="ad">12 a 80 hab. El portal lleva la voz del hotel.</div><div class="am">Despliegue 48 h · 30 pases</div></div></div>
-      <div class="acard rv" data-d style="--dd:.2s;"><div class="ap"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&auto=format&fit=crop&q=80" alt="Hotel patrimonio"></div><div class="ai"><div class="an">Patrimonio</div><div class="ad">Adhesivo reversible. Nada se taladra.</div><div class="am">Despliegue 72 h</div></div></div>
-      <div class="acard rv" data-d style="--dd:.3s;"><div class="ap"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&auto=format&fit=crop&q=80" alt="Resort"></div><div class="ai"><div class="an">Resort</div><div class="ad">Multi-zona. Spa y F&B en una línea de tiempo.</div><div class="am">Despliegue 5 días</div></div></div>
-      <div class="acard rv" data-d style="--dd:.4s;"><div class="ap"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&auto=format&fit=crop&q=80" alt="Hotel business"></div><div class="ai"><div class="an">Business</div><div class="ad">+100 hab, turnover rápido, PMS-first.</div><div class="am">Despliegue 7 días</div></div></div>
+      <div class="acard rv" data-d style="--dd:.1s;"><div class="ap"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80" alt=""></div><div class="ai"><div class="an">Boutique</div><div class="ad">12 a 80 hab. El portal lleva la voz del hotel.</div><div class="am">Despliegue 48 h · 30 pases</div></div></div>
+      <div class="acard rv" data-d style="--dd:.2s;"><div class="ap"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&auto=format&fit=crop&q=80" alt=""></div><div class="ai"><div class="an">Patrimonio</div><div class="ad">Adhesivo reversible. Nada se taladra.</div><div class="am">Despliegue 72 h</div></div></div>
+      <div class="acard rv" data-d style="--dd:.3s;"><div class="ap"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&auto=format&fit=crop&q=80" alt=""></div><div class="ai"><div class="an">Resort</div><div class="ad">Multi-zona. Spa y F&B en una línea de tiempo.</div><div class="am">Despliegue 5 días</div></div></div>
+      <div class="acard rv" data-d style="--dd:.4s;"><div class="ap"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&auto=format&fit=crop&q=80" alt=""></div><div class="ai"><div class="an">Business</div><div class="ad">+100 hab, turnover rápido, PMS-first.</div><div class="am">Despliegue 7 días</div></div></div>
     </div>
   </div>
 </section>
@@ -522,7 +530,7 @@ img { display: block; max-width: 100%; }
 
 <!-- ═══════════════ 14 · CIERRE ═══════════════ -->
 <section class="sec hero" id="s14" data-label="Hablemos">
-  <div class="photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&auto=format&fit=crop&q=80" alt="Terraza al atardecer con vista al mar"></div>
+  <div class="photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&auto=format&fit=crop&q=80" alt=""></div>
   <div class="scrim"></div>
   <div class="htext">
     <div class="eyebrow rv">Hablemos</div>
@@ -574,7 +582,6 @@ img { display: block; max-width: 100%; }
 
   /* reveal on scroll */
   const rv = document.querySelectorAll('.rv');
-  rv.forEach(el => { const d = el.getAttribute('style') || ''; });
   const io = new IntersectionObserver((es) => {
     es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
@@ -617,7 +624,7 @@ img { display: block; max-width: 100%; }
   if (toggle) {
     toggle.addEventListener('click', (ev) => {
       const b = ev.target.closest('button'); if (!b) return;
-      toggle.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      toggle.querySelectorAll('button').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
       const r = b.dataset.r;
       rtP.classList.toggle('dim', r !== 'personal');
       rtH.classList.toggle('dim', r !== 'huesped');
