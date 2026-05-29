@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hotel Hospitality Helper · Misión Digital</title>
+<meta name="description" content="Hospitalidad, sin fricción. Un código, dos interfaces, cero apps. Un nuevo sistema operativo para hoteles boutique en Uruguay.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Archivo:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════════════════════════════════
+   HOTEL HOSPITALITY HELPER · Four Seasons editorial register
+   Black on white, color delegated to photography, hairline rules, three
+   typefaces in strict roles, generous air. Restraint as luxury.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --ink:        #000000;
+  --graphite:   #2D2D2D;
+  --charcoal:   #404040;
+  --mid:        #6D6D6D;
+  --rule:       #D8D8D8;
+  --stone:      #E5E5E3;
+  --offwhite:   #FAFAFA;
+  --paper:      #FFFFFF;
+  --gold:       #B58E3F;
+  --gold-soft:  rgba(181, 142, 63, 0.12);
+
+  --serif-d: "Cormorant Garamond", Georgia, serif;   /* display, weight 300 */
+  --serif-b: "EB Garamond", Georgia, serif;           /* body + italic eyebrow */
+  --sans:    "Archivo", "Helvetica Neue", sans-serif; /* labels, nav, buttons */
+
+  --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-d:  cubic-bezier(0.16, 1, 0.3, 1);
+  --gut:     clamp(28px, 7vw, 132px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+@media (prefers-reduced-motion: no-preference) { html.smooth { scroll-behavior: smooth; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif-b); font-size: 18px; line-height: 1.5; letter-spacing: 0.2px; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--gold-soft); }
+
+/* ─── Type roles ─── */
+.eyebrow { font-family: var(--serif-b); font-style: italic; font-size: clamp(15px, 1.3vw, 19px); color: var(--charcoal); letter-spacing: 0.2px; margin-bottom: 22px; }
+.label { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--charcoal); }
+.display {
+  font-family: var(--serif-d); font-weight: 300;
+  font-size: clamp(40px, 5.6vw, 88px); line-height: 1.04; letter-spacing: -0.3px;
+  color: var(--ink); text-wrap: balance;
+}
+.display .gold { color: var(--gold); font-style: italic; }
+.place {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(34px, 5vw, 76px); line-height: 1.05; letter-spacing: 5px; text-transform: uppercase;
+}
+.lede { font-family: var(--serif-b); font-size: clamp(18px, 1.5vw, 23px); line-height: 1.6; color: var(--graphite); max-width: 56ch; }
+.body { font-family: var(--serif-b); font-size: 18px; line-height: 1.62; color: var(--graphite); max-width: 58ch; }
+.body em { font-style: italic; color: var(--ink); }
+.cap { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); }
+
+/* ─── Buttons / links ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--sans); font-weight: 700; font-size: 12.5px; letter-spacing: 3.5px; text-transform: uppercase;
+  padding: 16px 30px; border-radius: 0; text-decoration: none; cursor: pointer; border: 1px solid var(--ink);
+  background: var(--ink); color: #fff; transition: background 360ms var(--ease), color 360ms var(--ease);
+}
+.btn:hover { background: transparent; color: var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: #fff; }
+.tlink { font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 3px; transition: opacity 300ms; }
+.tlink:hover { opacity: 0.55; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   HEADER
+   ════════════════════════════════════════════════════════════════════════ */
+.hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between;
+  padding: 20px var(--gut); transition: background 400ms var(--ease), color 400ms var(--ease), padding 400ms var(--ease); }
+.hdr.solid { background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); padding-top: 14px; padding-bottom: 14px; }
+.hdr .mark { display: flex; align-items: center; gap: 12px; font-family: var(--sans); font-weight: 200; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+.hdr .mark svg { width: 26px; height: 26px; }
+.hdr.on-photo:not(.solid) .mark, .hdr.on-photo:not(.solid) .nav a { color: #fff; }
+.hdr.on-photo:not(.solid) .mark svg path { stroke: #fff; }
+.nav { display: flex; align-items: center; gap: 30px; }
+.nav a { font-family: var(--sans); font-weight: 500; font-size: 11.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: opacity 300ms; }
+.nav a:hover { opacity: 0.55; }
+.nav .demo { border: 1px solid currentColor; padding: 10px 18px; }
+@media (max-width: 900px) { .nav a:not(.demo) { display: none; } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SECTION SYSTEM
+   ════════════════════════════════════════════════════════════════════════ */
+.sec { padding: clamp(80px, 11vh, 150px) var(--gut); position: relative; }
+.sec.stone { background: var(--stone); }
+.sec.off { background: var(--offwhite); }
+.sec.ink { background: var(--ink); color: #fff; }
+.sec.ink .display, .sec.ink .lede, .sec.ink .body { color: #fff; }
+.sec.ink .eyebrow { color: rgba(255,255,255,0.7); }
+.sec.ink .label { color: rgba(255,255,255,0.6); }
+.wrap { max-width: 1200px; margin: 0 auto; }
+.rule { height: 1px; background: var(--rule); border: 0; }
+
+/* Full-bleed hero */
+.hero { height: 100vh; min-height: 620px; padding: 0; display: flex; align-items: flex-end; position: relative; overflow: hidden; }
+.hero .photo { position: absolute; inset: 0; z-index: 0; }
+.hero .photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform 9s var(--ease); }
+.hero.shown .photo img { transform: scale(1); }
+.hero .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.18) 100%); }
+.hero .htext { position: relative; z-index: 2; color: #fff; padding: 0 var(--gut) clamp(64px, 12vh, 130px); width: 100%; }
+.hero .eyebrow, .hero .cap { color: rgba(255,255,255,0.86); }
+.hero .place, .hero .display { color: #fff; }
+.hero .util { display: flex; gap: 26px; margin-top: 34px; flex-wrap: wrap; }
+.hero .util a { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+/* Split editorial (photo + text) */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 88px); align-items: center; }
+.split.right .copy { order: 2; }
+.split.right .art { order: 1; }
+.split .art { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+.split .art img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); transition: transform 7s var(--ease); }
+.split.shown .art img { transform: scale(1); }
+.split .art .tag { position: absolute; left: 0; bottom: 0; background: var(--paper); padding: 12px 18px; }
+
+/* Centered statement */
+.center { text-align: center; max-width: 980px; margin: 0 auto; }
+.center .lede { margin: 30px auto 0; }
+
+/* Generic grid */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
+.grid4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+/* Section heading block */
+.shead { margin-bottom: clamp(40px, 6vh, 80px); max-width: 60ch; }
+.shead .display { margin-top: 16px; }
+
+/* ─── Reveal ─── */
+.rv { opacity: 0; transform: translateY(26px); transition: opacity 1.1s var(--ease), transform 1.2s var(--ease-d); }
+.rv.in { opacity: 1; transform: none; }
+.rv[data-d] { transition-delay: var(--dd, 0s); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   COMPONENTS
+   ════════════════════════════════════════════════════════════════════════ */
+/* Meters (diagnosis) */
+.meter { margin-top: 26px; }
+.meter .top { display: flex; justify-content: space-between; align-items: baseline; }
+.meter .nm { font-family: var(--serif-b); font-size: 16px; color: var(--graphite); }
+.meter .vl { font-family: var(--serif-d); font-weight: 400; font-size: 30px; color: var(--ink); }
+.meter .bar { height: 1px; background: var(--rule); margin-top: 10px; position: relative; }
+.meter .bar::after { content: ""; position: absolute; left: 0; top: 0; height: 1px; width: 0; background: var(--ink); transition: width 1.6s var(--ease-d) 0.2s; }
+.meter.in .bar::after { width: var(--w, 80%); }
+
+/* Before / after (cambio) */
+.ba { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(24px, 4vw, 64px); align-items: start; margin-top: 12px; }
+.ba .col h4 { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.ba .col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ba .col li { font-family: var(--serif-b); font-size: 16px; color: var(--graphite); line-height: 1.45; }
+.ba .col.before li { color: var(--mid); text-decoration: line-through; text-decoration-color: var(--rule); }
+.ba .arrow { align-self: center; text-align: center; font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); }
+.ba .arrow .t { font-family: var(--serif-d); font-style: italic; font-size: 22px; color: var(--gold); display: block; margin-top: 8px; }
+
+/* QR dual path (definicion) */
+.qr-stage { display: flex; flex-direction: column; align-items: center; gap: 22px; margin-top: 40px; }
+.qr-glyph { width: 116px; height: 116px; position: relative; }
+.qr-glyph svg { width: 100%; height: 100%; }
+.qr-toggle { display: inline-flex; border: 1px solid var(--ink); }
+.qr-toggle button { font-family: var(--sans); font-weight: 500; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; padding: 12px 22px; background: transparent; border: none; cursor: pointer; color: var(--ink); transition: all 300ms; }
+.qr-toggle button.on { background: var(--ink); color: #fff; }
+.qr-routes { display: grid; grid-template-columns: 1fr 1fr; gap: 0; width: 100%; max-width: 760px; border: 1px solid var(--rule); margin-top: 10px; }
+.qr-route { padding: 22px 24px; transition: background 300ms, opacity 300ms; }
+.qr-route:first-child { border-right: 1px solid var(--rule); }
+.qr-route.dim { opacity: 0.34; }
+.qr-route .rt { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
+.qr-route .rb { font-family: var(--serif-b); font-size: 15px; color: var(--graphite); line-height: 1.5; }
+.qr-badge { font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+/* Eight tabs */
+.tabs8 { border: 1px solid var(--rule); }
+.tabs8 .phs { display: grid; grid-template-columns: repeat(3,1fr); }
+.tabs8 .ph { padding: 14px 18px; font-family: var(--sans); font-weight: 700; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+.tabs8 .ph:last-child { border-right: none; }
+.tabs8 .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tabs8 .cell { padding: 22px 18px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); transition: background 300ms; cursor: default; }
+.tabs8 .cell:nth-child(4n) { border-right: none; }
+.tabs8 .cell:nth-child(n+5) { border-bottom: none; }
+.tabs8 .cell:hover { background: var(--gold-soft); }
+.tabs8 .cell .rn { font-family: var(--serif-d); font-style: italic; font-size: 26px; color: var(--mid); }
+.tabs8 .cell:hover .rn { color: var(--gold); }
+.tabs8 .cell .cn { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); margin-top: 10px; }
+.tabs8 .cell .cd { font-family: var(--serif-b); font-size: 13.5px; color: var(--graphite); margin-top: 6px; line-height: 1.45; }
+
+/* Two-worlds dual frames */
+.worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.world { border: 1px solid var(--rule); background: var(--paper); }
+.world .wh { padding: 16px 22px; border-bottom: 1px solid var(--rule); font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); display: flex; justify-content: space-between; }
+.world .wb { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.world .row { display: flex; justify-content: space-between; align-items: center; font-family: var(--serif-b); font-size: 15px; color: var(--graphite); padding-bottom: 11px; border-bottom: 1px solid var(--rule); }
+.world .row:last-child { border-bottom: none; }
+.world .row .t { font-family: var(--sans); font-size: 11px; letter-spacing: 1px; color: var(--mid); }
+.world .tiles { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.world .tile { border: 1px solid var(--rule); padding: 16px 10px; text-align: center; font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--graphite); }
+.world .pill { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 6px 12px; }
+
+/* KPI row (evidencia) */
+.kpis { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--rule); margin-top: 40px; }
+.kpi { padding: 36px 24px; border-right: 1px solid var(--rule); }
+.kpi:last-child { border-right: none; }
+.kpi .n { font-family: var(--serif-d); font-weight: 300; font-size: clamp(48px,5vw,76px); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.kpi .l { font-family: var(--sans); font-weight: 700; font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--charcoal); margin-top: 14px; }
+.kpi .s { font-family: var(--serif-b); font-size: 13px; color: var(--mid); margin-top: 6px; }
+
+/* Pillars (flip-lite) */
+.pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(24px,3vw,52px); }
+.pillar .pt { font-family: var(--serif-d); font-weight: 400; font-size: 30px; color: var(--ink); padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 16px; }
+.pillar .pb { font-family: var(--serif-b); font-size: 15.5px; color: var(--graphite); line-height: 1.55; }
+.pillar .pq { font-family: var(--serif-d); font-style: italic; font-size: 17px; color: var(--ink); margin-top: 16px; line-height: 1.4; }
+.pillar .pa { font-family: var(--sans); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-top: 10px; }
+
+/* Archetype cards */
+.arch { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.acard { border: 1px solid var(--rule); background: var(--paper); display: flex; flex-direction: column; }
+.acard .ap { aspect-ratio: 3/4; overflow: hidden; }
+.acard .ap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.acard:hover .ap img { transform: scale(1.05); }
+.acard .ai { padding: 22px 20px 26px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.acard .an { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); }
+.acard .ad { font-family: var(--serif-b); font-size: 13.5px; color: var(--graphite); line-height: 1.5; }
+.acard .am { font-family: var(--sans); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); margin-top: auto; padding-top: 14px; border-top: 1px solid var(--rule); }
+
+/* Steps + tiers (servicio) */
+.steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(24px,3vw,52px); margin-bottom: clamp(48px,7vh,90px); }
+.step .sn { font-family: var(--serif-d); font-style: italic; font-size: 40px; color: var(--gold); }
+.step .st { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink); margin: 12px 0 8px; }
+.step .sb { font-family: var(--serif-b); font-size: 15px; color: var(--graphite); line-height: 1.55; }
+.tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; align-items: stretch; }
+.tier { border: 1px solid var(--rule); padding: 30px 26px; background: var(--paper); display: flex; flex-direction: column; gap: 10px; }
+.tier.feat { border-color: var(--gold); position: relative; }
+.tier.feat .flag { position: absolute; top: -1px; right: -1px; background: var(--gold); color: #fff; font-family: var(--sans); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 11px; }
+.tier .tn { font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; }
+.tier .tp { font-family: var(--serif-d); font-weight: 400; font-size: 42px; color: var(--ink); }
+.tier .tp span { font-family: var(--sans); font-size: 12px; letter-spacing: 1px; color: var(--mid); }
+.tier .tl { font-family: var(--serif-b); font-size: 14px; color: var(--graphite); line-height: 1.5; }
+
+/* Attestation quote */
+.attest { max-width: 860px; margin: 0 auto; text-align: center; }
+.attest .q { font-family: var(--serif-d); font-weight: 300; font-size: clamp(28px,3.4vw,52px); line-height: 1.18; color: var(--ink); }
+.attest .sig { font-family: var(--sans); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); margin-top: 18px; }
+.attest .two-q { display: flex; flex-direction: column; gap: 40px; }
+
+/* Architecture diagram */
+.archi { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(20px,3vw,48px); margin-top: 20px; align-items: center; }
+.archi .col h4 { font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--mid); margin-bottom: 18px; }
+.archi .node { border: 1px solid var(--rule); padding: 16px 18px; margin-bottom: 12px; }
+.archi .node .nn { font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink); }
+.archi .node .nd { font-family: var(--serif-b); font-size: 13px; color: var(--mid); margin-top: 4px; }
+.archi .core { text-align: center; border: 1px solid var(--ink); padding: 30px 22px; }
+.archi .core .ct { font-family: var(--serif-d); font-style: italic; font-size: 26px; color: var(--ink); }
+.archi .core .cs { font-family: var(--sans); font-weight: 200; font-size: 20px; letter-spacing: 6px; margin-top: 6px; }
+.archi .core .cd { font-family: var(--serif-b); font-size: 13px; color: var(--mid); margin-top: 12px; line-height: 1.5; }
+
+/* footer */
+.foot { background: var(--ink); color: #fff; padding: clamp(60px,9vh,110px) var(--gut) 50px; }
+.foot .cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+.foot h5 { font-family: var(--serif-b); font-size: 18px; color: #fff; margin-bottom: 18px; }
+.foot a, .foot p { font-family: var(--sans); font-weight: 400; font-size: 12px; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 10px; }
+.foot a:hover { color: #fff; }
+.foot .legal { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.18); font-family: var(--sans); font-size: 10.5px; letter-spacing: 1.5px; color: rgba(255,255,255,0.5); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .split, .grid2, .grid3, .worlds, .pillars, .steps, .tiers, .archi { grid-template-columns: 1fr; }
+  .split.right .copy { order: 1; } .split.right .art { order: 2; }
+  .tabs8 .grid { grid-template-columns: repeat(2,1fr); }
+  .tabs8 .cell:nth-child(4n) { border-right: 1px solid var(--rule); }
+  .tabs8 .cell:nth-child(2n) { border-right: none; }
+  .kpis, .arch { grid-template-columns: repeat(2,1fr); }
+  .ba { grid-template-columns: 1fr; } .ba .arrow { display: none; }
+  .foot .cols { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .rv { opacity: 1 !important; transform: none !important; }
+  .hero .photo img, .split .art img { transform: none !important; }
+  .meter .bar::after { width: var(--w,80%) !important; }
+}
+@media print { .hdr { display: none; } .sec { padding: 30px; } .hero { height: auto; } }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="hdr on-photo" id="hdr">
+  <a class="mark" href="#s1">
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 C16 10, 10 12, 10 18 a6 6 0 0 0 12 0 C22 12, 16 10, 16 3 Z M16 18 V29" stroke="currentColor" stroke-width="1.1"/></svg>
+    Hotel Hospitality Helper
+  </a>
+  <nav class="nav">
+    <a href="#s4">El código</a>
+    <a href="#s8">Demo</a>
+    <a href="#s12">Arquetipos</a>
+    <a href="#s13">Servicio</a>
+    <a class="demo" href="#s14">Pedir demo</a>
+  </nav>
+</header>
+
+<!-- ═══════════════ 1 · PORTADA ═══════════════ -->
+<section class="sec hero" id="s1" data-label="Portada">
+  <div class="photo"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&auto=format&fit=crop&q=80" alt="Hotel de lujo al atardecer"></div>
+  <div class="scrim"></div>
+  <div class="htext">
+    <div class="eyebrow rv">Misión Digital · Montevideo · Edición Hospitalidad · 2026</div>
+    <h1 class="display rv" data-d style="--dd:.15s; font-size:clamp(44px,6.5vw,104px);">Hotel. Hospitalidad. <span class="gold">Helper.</span></h1>
+    <p class="lede rv" data-d style="--dd:.35s; color:rgba(255,255,255,.9); margin-top:24px;">Un código. Dos interfaces. Cero apps. Un nuevo sistema operativo para hoteles boutique en Uruguay.</p>
+    <div class="util rv" data-d style="--dd:.55s;">
+      <a class="tlink" href="#s8">Saltá a la demo</a>
+      <a class="tlink" href="#s4">Cómo funciona</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 2 · DIAGNÓSTICO ═══════════════ -->
+<section class="sec split" id="s2" data-label="Diagnóstico">
+  <div class="copy">
+    <div class="eyebrow rv">Lo que el dashboard no ve</div>
+    <h2 class="display rv" data-d style="--dd:.1s;">La hospitalidad se sostiene con <span style="font-style:italic;">trabajo invisible</span>.</h2>
+    <p class="body rv" data-d style="--dd:.25s; margin-top:24px;">Un huésped pide toallas. La nota viaja por walkie-talkie hasta la mucama. Las toallas llegan. Nada quedó registrado. <em>Si no está firmado, no pasó.</em></p>
+    <div class="meter rv" data-d style="--dd:.4s; --w:80%;"><div class="top"><span class="nm">Operaciones sin registro</span><span class="vl">80%</span></div><div class="bar"></div></div>
+    <div class="meter rv" data-d style="--dd:.5s; --w:65%;"><div class="top"><span class="nm">Pedidos perdidos entre turnos</span><span class="vl">65%</span></div><div class="bar"></div></div>
+    <div class="meter rv" data-d style="--dd:.6s; --w:90%;"><div class="top"><span class="nm">Huéspedes que rechazan apps</span><span class="vl">90%</span></div><div class="bar"></div></div>
+  </div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1551038247-3d9af20df552?w=1920&auto=format&fit=crop&q=80" alt="Pasillo de hotel"><div class="tag"><span class="cap">Detrás del telón</span></div></div>
+</section>
+
+<!-- ═══════════════ 3 · EL CAMBIO ═══════════════ -->
+<section class="sec split right stone" id="s3" data-label="El Código">
+  <div class="copy">
+    <div class="eyebrow rv">Del papel al QR</div>
+    <h2 class="display rv" data-d style="--dd:.1s;">Un código por habitación, <span style="font-style:italic;">impreso una vez</span>.</h2>
+    <div class="ba rv" data-d style="--dd:.3s;">
+      <div class="col before"><h4>Antes</h4><ul><li>Planillas en clipboards</li><li>Radio entre turnos</li><li>Checklists a lápiz</li><li>Sin auditoría</li></ul></div>
+      <div class="arrow">Antes a después<span class="t">02 min</span></div>
+      <div class="col"><h4>Después</h4><ul><li>El personal escanea su lista</li><li>El huésped, un portal sin descargas</li><li>Sello de fecha, hora y foto</li><li>Cierre firmado al PMS, solo</li></ul></div>
+    </div>
+  </div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&auto=format&fit=crop&q=80" alt="Recepción de hotel"></div>
+</section>
+
+<!-- ═══════════════ 4 · DEFINICIÓN ═══════════════ -->
+<section class="sec center" id="s4" data-label="El Código">
+  <div class="wrap center">
+    <div class="eyebrow rv">Cómo funciona, en una frase</div>
+    <h2 class="display rv" data-d style="--dd:.1s;">Un código único. Dos lecturas distintas.</h2>
+    <p class="lede rv" data-d style="--dd:.25s;">La plataforma reconoce quién escanea, personal o huésped, y sirve la interfaz exacta en menos de 200 milisegundos. El mismo papel, dos lecturas.</p>
+    <div class="qr-stage rv" data-d style="--dd:.4s;">
+      <div class="qr-glyph"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="6" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="13" y="13" width="12" height="12" fill="#000"/><rect x="68" y="6" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="75" y="13" width="12" height="12" fill="#000"/><rect x="6" y="68" width="26" height="26" fill="none" stroke="#000" stroke-width="3"/><rect x="13" y="75" width="12" height="12" fill="#000"/><g fill="#000"><rect x="42" y="10" width="6" height="6"/><rect x="54" y="10" width="6" height="6"/><rect x="42" y="22" width="6" height="6"/><rect x="42" y="42" width="6" height="6"/><rect x="54" y="48" width="6" height="6"/><rect x="66" y="42" width="6" height="6"/><rect x="78" y="54" width="6" height="6"/><rect x="42" y="66" width="6" height="6"/><rect x="60" y="66" width="6" height="6"/><rect x="66" y="78" width="6" height="6"/><rect x="84" y="84" width="6" height="6"/></g></svg></div>
+      <div class="qr-toggle"><button class="on" data-r="personal">Soy personal</button><button data-r="huesped">Soy huésped</button></div>
+      <div class="qr-badge" id="qrBadge">Resuelto en 184 ms</div>
+      <div class="qr-routes">
+        <div class="qr-route" id="rtPersonal"><div class="rt">Panel · Operación</div><div class="rb">Tu lista de tareas con tu rol, sellada con hora y firma.</div></div>
+        <div class="qr-route dim" id="rtHuesped"><div class="rt">Portal · Huésped</div><div class="rb">Todo el hotel, sin descargar nada. Tu idioma, tu reserva.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 5 · DOS MUNDOS ═══════════════ -->
+<section class="sec off" id="s5" data-label="Dos Mundos">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Un QR, dos interfaces</div><h2 class="display">Operación de un lado. Hospitalidad del otro.</h2></div>
+    <div class="worlds">
+      <div class="world rv" data-d style="--dd:.15s;">
+        <div class="wh"><span>Panel del personal</span><span style="color:var(--mid)">Hab. 408</span></div>
+        <div class="wb">
+          <div class="row"><span>Blancos</span><span class="t">15 min</span></div>
+          <div class="row"><span>Minibar</span><span class="t">04 min</span></div>
+          <div class="row"><span>Baño</span><span class="t">18 min</span></div>
+          <div class="row"><span>Inspección final con foto</span><span class="t">marcar</span></div>
+        </div>
+      </div>
+      <div class="world rv" data-d style="--dd:.3s;">
+        <div class="wh"><span>Portal del huésped</span><span style="color:var(--mid)">Hola, María</span></div>
+        <div class="wb">
+          <div class="tiles"><div class="tile">Room service</div><div class="tile">Limpieza</div><div class="tile">Spa</div><div class="tile">Late checkout</div><div class="tile">Guía local</div><div class="tile">Conserjería</div></div>
+          <span class="pill">En camino · 8 min · toallas extra</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 6 · EL PASE ═══════════════ -->
+<section class="sec split" id="s6" data-label="El Pase">
+  <div class="copy">
+    <div class="eyebrow rv">El artefacto físico</div>
+    <h2 class="display rv" data-d style="--dd:.1s;">Cada habitación tiene su propio pase.</h2>
+    <p class="body rv" data-d style="--dd:.25s; margin-top:24px;">Un código permanente, impreso una vez, con un ID único e historia infinita. Escaneá una vez, datos cargados. Cada manual, en cada habitación, sin conexión. El pase no caduca: vive con la propiedad.</p>
+    <p class="cap rv" data-d style="--dd:.4s; margin-top:26px;">Puerta 408 · Suite Frente al Mar · UY26H00000408215103</p>
+  </div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80" alt="Puerta de suite"><div class="tag"><span class="cap">El pase, en la puerta</span></div></div>
+</section>
+
+<!-- ═══════════════ 7 · OCHO PESTAÑAS ═══════════════ -->
+<section class="sec stone" id="s7" data-label="Ocho Pestañas">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Tu sistema de archivo, una pestaña a la vez</div><h2 class="display">Ocho pestañas, una habitación, cero papel.</h2></div>
+    <div class="tabs8 rv" data-d style="--dd:.15s;">
+      <div class="phs"><div class="ph">Identificar · I a IV</div><div class="ph">Medir · V a VI</div><div class="ph">Cerrar · VII a VIII</div></div>
+      <div class="grid">
+        <div class="cell"><div class="rn">I</div><div class="cn">Cliente</div><div class="cd">La cuenta que da contexto.</div></div>
+        <div class="cell"><div class="rn">II</div><div class="cn">Orden de Trabajo</div><div class="cd">El alcance, con W-número.</div></div>
+        <div class="cell"><div class="rn">III</div><div class="cn">Habitación</div><div class="cd">El espacio intervenido.</div></div>
+        <div class="cell"><div class="rn">IV</div><div class="cn">Documentación</div><div class="cd">Fotos y adjuntos, sin conexión.</div></div>
+        <div class="cell"><div class="rn">V</div><div class="cn">Medidas</div><div class="cd">Unidad, foto y rango.</div></div>
+        <div class="cell"><div class="rn">VI</div><div class="cn">Verificación</div><div class="cd">Cada Sí registrado.</div></div>
+        <div class="cell"><div class="rn">VII</div><div class="cn">Intervenciones</div><div class="cd">Las dos atestaciones.</div></div>
+        <div class="cell"><div class="rn">VIII</div><div class="cn">Firma</div><div class="cd">Envío al huésped, piso y PMS.</div></div>
+      </div>
+    </div>
+    <p class="cap rv" data-d style="--dd:.3s; margin-top:24px;">Sin conexión, sincroniza al volver la señal.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 8 · DEMO ═══════════════ -->
+<section class="sec split right" id="s8" data-label="Demo">
+  <div class="copy">
+    <div class="eyebrow rv">Probá la aplicación, tocá lo que veas</div>
+    <h2 class="display rv" data-d style="--dd:.1s;">Un QR, dos mundos. <span style="font-style:italic;">Tocá.</span></h2>
+    <p class="body rv" data-d style="--dd:.25s; margin-top:24px;">Orden W-4082, Hab. 408, Suite Frente al Mar. El Pase abre la habitación en menos de 200 ms, dos preguntas antes de cerrar, firma en segundos. Del lado del huésped: un portal sin descargas, toallas extra en ocho minutos.</p>
+    <div class="rv" data-d style="--dd:.4s; margin-top:28px;"><a class="btn ghost" href="#s4">Elegí tu rol</a></div>
+  </div>
+  <div class="art rv"><img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1920&auto=format&fit=crop&q=80" alt="Huésped con teléfono"><div class="tag"><span class="cap">En vivo · W-4082</span></div></div>
+</section>
+
+<!-- ═══════════════ 9 · ATESTACIONES ═══════════════ -->
+<section class="sec ink" id="s9" data-label="Atestaciones">
+  <div class="wrap attest">
+    <div class="eyebrow rv" style="text-align:center;">Las dos atestaciones</div>
+    <div class="two-q" style="margin-top:30px;">
+      <div class="rv" data-d style="--dd:.15s;"><p class="q">"La habitación está lista."</p><p class="sig" style="color:rgba(255,255,255,.6)">Sí · firmado por Carla M. · 11:42 · 22.05.2026</p></div>
+      <div class="rv" data-d style="--dd:.35s;"><p class="q">"La habitación es <span style="font-style:italic;color:var(--gold)">segura</span> para entregar."</p><p class="sig" style="color:rgba(255,255,255,.6)">Sí · firmado por Carla M. · 11:43 · 22.05.2026</p></div>
+    </div>
+    <p class="lede rv" data-d style="--dd:.55s; color:rgba(255,255,255,.8); margin:40px auto 0; font-style:italic; text-align:center;">Una declaración firmada, no solo una marca.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 10 · ARQUITECTURA ═══════════════ -->
+<section class="sec" id="s10" data-label="Arquitectura">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Una sola plataforma, todo el ciclo operativo</div><h2 class="display">Entradas. Núcleo. Salidas.</h2></div>
+    <div class="archi">
+      <div class="col rv" data-d style="--dd:.1s;"><h4>Tres entradas</h4>
+        <div class="node"><div class="nn">QR del personal</div><div class="nd">Work-order</div></div>
+        <div class="node"><div class="nn">QR del huésped</div><div class="nd">Request</div></div>
+        <div class="node"><div class="nn">Equipos · el Pase</div><div class="nd">Telemetry</div></div>
+      </div>
+      <div class="core rv" data-d style="--dd:.25s;"><div class="ct">Plataforma</div><div class="cs">XPRNZ</div><div class="cd">Enrutamiento por rol, persistencia por habitación, idioma por dispositivo, auditoría con sello temporal.</div></div>
+      <div class="col rv" data-d style="--dd:.4s;"><h4>Tres salidas</h4>
+        <div class="node"><div class="nn">PMS bidireccional</div><div class="nd">Cloudbeds · Mews</div></div>
+        <div class="node"><div class="nn">Dashboard en vivo</div><div class="nd">Operación</div></div>
+        <div class="node"><div class="nn">Push al huésped</div><div class="nd">SMS · WhatsApp · e-mail</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 11 · EVIDENCIA ═══════════════ -->
+<section class="sec off" id="s11" data-label="Evidencia">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Por qué funciona, y lo que ya medimos</div><h2 class="display">Velocidad. Certeza. Seguridad.</h2></div>
+    <div class="pillars">
+      <div class="pillar rv" data-d style="--dd:.1s;"><div class="pt">Velocidad</div><div class="pb">Hasta 60% más rápido en administración. Una pantalla, ocho pestañas, el mismo flujo en cada habitación.</div><div class="pq">"Antes tardaba veintidós minutos. Ahora son cuatro."</div><div class="pa">Carla M. · Gobernanta</div></div>
+      <div class="pillar rv" data-d style="--dd:.25s;"><div class="pt">Certeza</div><div class="pb">Cada acción con sello de fecha, hora y huella. Cero órdenes cerradas sin firma.</div><div class="pq">"El auditor pidió un Sí de hace dos años. Lo tuve en doce segundos."</div><div class="pa">Sergio L. · Mantenimiento</div></div>
+      <div class="pillar rv" data-d style="--dd:.4s;"><div class="pt">Seguridad</div><div class="pb">Cifrado AES-256. Ley 18.331 con URCDP, datos en São Paulo, réplica UE opcional. White-label por propiedad.</div><div class="pq">Tus datos quedan en la región, bajo la Ley 18.331.</div><div class="pa">Garantía silenciosa</div></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi rv" data-d style="--dd:.1s;"><div class="n" data-count="60" data-suf="%">0%</div><div class="l">Menos tiempo admin.</div><div class="s">12 propiedades · Q4 2025</div></div>
+      <div class="kpi rv" data-d style="--dd:.2s;"><div class="n" data-count="4" data-suf=" min">0 min</div><div class="l">Desde 22 min</div><div class="s">1.847 solicitudes · abril 2026</div></div>
+      <div class="kpi rv" data-d style="--dd:.3s;"><div class="n" data-count="0" data-suf="">0</div><div class="l">Apps por diseño</div><div class="s">Cero descargas</div></div>
+      <div class="kpi rv" data-d style="--dd:.4s;"><div class="n" data-count="30" data-suf="%">0%</div><div class="l">Menos costos</div><div class="s">+500 instalaciones</div></div>
+    </div>
+    <p class="cap rv" data-d style="--dd:.5s; margin-top:24px;">No reemplazamos tu PMS ni competimos con ALICE o HelloShift. SLA 99.9% · P1 en 30 min · 24/7.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 12 · ARQUETIPOS ═══════════════ -->
+<section class="sec" id="s12" data-label="Arquetipos">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Cuatro arquetipos, una plataforma</div><h2 class="display">Cuatro hoteles distintos. <span style="font-style:italic;">Un mismo QR.</span></h2></div>
+    <div class="arch">
+      <div class="acard rv" data-d style="--dd:.1s;"><div class="ap"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80" alt="Hotel boutique"></div><div class="ai"><div class="an">Boutique</div><div class="ad">12 a 80 hab. El portal lleva la voz del hotel.</div><div class="am">Despliegue 48 h · 30 pases</div></div></div>
+      <div class="acard rv" data-d style="--dd:.2s;"><div class="ap"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&auto=format&fit=crop&q=80" alt="Hotel patrimonio"></div><div class="ai"><div class="an">Patrimonio</div><div class="ad">Adhesivo reversible. Nada se taladra.</div><div class="am">Despliegue 72 h</div></div></div>
+      <div class="acard rv" data-d style="--dd:.3s;"><div class="ap"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&auto=format&fit=crop&q=80" alt="Resort"></div><div class="ai"><div class="an">Resort</div><div class="ad">Multi-zona. Spa y F&B en una línea de tiempo.</div><div class="am">Despliegue 5 días</div></div></div>
+      <div class="acard rv" data-d style="--dd:.4s;"><div class="ap"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&auto=format&fit=crop&q=80" alt="Hotel business"></div><div class="ai"><div class="an">Business</div><div class="ad">+100 hab, turnover rápido, PMS-first.</div><div class="am">Despliegue 7 días</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 13 · SERVICIO ═══════════════ -->
+<section class="sec stone" id="s13" data-label="Servicio">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Puesta en marcha, precio y soporte</div><h2 class="display">Conectá. Configurá. <span style="font-style:italic;">Viví el piloto.</span></h2></div>
+    <div class="steps">
+      <div class="step rv" data-d style="--dd:.1s;"><div class="sn">01</div><div class="st">Conectá</div><div class="sb">Verificación bancaria de un peso por BROU o banco privado. Sin setup fee.</div></div>
+      <div class="step rv" data-d style="--dd:.2s;"><div class="sn">02</div><div class="st">Configurá</div><div class="sb">Hoja de Pases, etiquetas QR, idiomas, marca y PMS: Cloudbeds, Mews o CSV.</div></div>
+      <div class="step rv" data-d style="--dd:.3s;"><div class="sn">03</div><div class="st">Piloto</div><div class="sb">USD 4 por habitación activa al mes, garantizado 24 meses. Sin permanencia, cancelable.</div></div>
+    </div>
+    <div class="tiers">
+      <div class="tier rv" data-d style="--dd:.1s;"><div class="tn">Conectado</div><div class="tp">50<span> / mes</span></div><div class="tl">Portal con tu marca, PMS por CSV, soporte 48 h.</div></div>
+      <div class="tier feat rv" data-d style="--dd:.2s;"><div class="flag">Más elegido</div><div class="tn">Privado</div><div class="tp">120<span> / mes</span></div><div class="tl">Dominio propio, PMS por API, datos solo en UY, soporte 12 h.</div></div>
+      <div class="tier rv" data-d style="--dd:.3s;"><div class="tn">Aislado</div><div class="tp">280<span> / mes</span></div><div class="tl">Servidor dedicado, cero telemetría, SLA 99.9% contractual.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 14 · CIERRE ═══════════════ -->
+<section class="sec hero" id="s14" data-label="Hablemos">
+  <div class="photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&auto=format&fit=crop&q=80" alt="Terraza al atardecer con vista al mar"></div>
+  <div class="scrim"></div>
+  <div class="htext">
+    <div class="eyebrow rv">Hablemos</div>
+    <h2 class="display rv" data-d style="--dd:.15s;">Eficiente. Seguro. Confiable. <span class="gold">Y siempre con vos.</span></h2>
+    <p class="lede rv" data-d style="--dd:.35s; color:rgba(255,255,255,.9); margin-top:22px;">La misma calma que ofrecés a tus huéspedes, ahora también en tu operación. Veinte minutos: configuramos una habitación de prueba con tu marca, tu idioma, tu plan de piso, antes de la llamada.</p>
+    <div class="util rv" data-d style="--dd:.55s;"><a class="btn" href="mailto:info@mision-digital.com?subject=Pedir%20una%20demo%20·%20Hotel%20Hospitality%20Helper">Pedir una demo</a></div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="foot">
+  <div class="cols">
+    <div>
+      <h5>Hotel Hospitality Helper</h5>
+      <p style="font-family:var(--serif-b); font-size:15px; letter-spacing:.2px; line-height:1.6; max-width:42ch; text-transform:none;">XPRNZ para Hospitalidad. Por y para gente del oficio. Un nuevo sistema operativo para hoteles boutique en Uruguay.</p>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <a href="mailto:info@mision-digital.com">info@mision-digital.com</a>
+      <a href="https://mision-digital.com">mision-digital.com</a>
+      <p>Montevideo · Uruguay</p>
+    </div>
+    <div>
+      <h5>Plataforma</h5>
+      <a href="#s4">El código</a><a href="#s7">Ocho pestañas</a><a href="#s12">Arquetipos</a><a href="#s13">Servicio</a>
+    </div>
+  </div>
+  <div class="legal">Misión Digital · Creamos tu futuro · 2026 · Tus datos bajo la Ley 18.331, región São Paulo</div>
+</footer>
+
+<script>
+(function () {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Smooth scrolling via class (kept off during ?reveal so headless captures land exactly) */
+  if (!location.search.includes('reveal') && !reduced) document.documentElement.classList.add('smooth');
+
+  /* SCREENSHOT MODE: ?reveal forces all reveals + states, and collapses the
+     100vh hero so the whole deck flows for full-page headless capture */
+  if (location.search.includes('reveal')) {
+    const css = document.createElement('style');
+    css.textContent = '.hero{height:auto!important;min-height:0!important}';
+    document.head.appendChild(css);
+    document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
+    document.querySelectorAll('.meter').forEach(m => m.classList.add('in'));
+    document.querySelectorAll('.hero,.split').forEach(s => s.classList.add('shown'));
+    document.querySelectorAll('.n[data-count]').forEach(n => { n.textContent = n.dataset.count + (n.dataset.suf || ''); n.dataset.done = '1'; });
+  }
+
+  /* reveal on scroll */
+  const rv = document.querySelectorAll('.rv');
+  rv.forEach(el => { const d = el.getAttribute('style') || ''; });
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  rv.forEach(el => io.observe(el));
+
+  /* meters + hero + count-ups via section observers */
+  const secIo = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.meter').forEach(m => m.classList.add('in'));
+      if (e.target.classList.contains('hero')) e.target.classList.add('shown');
+      if (e.target.classList.contains('split')) e.target.classList.add('shown');
+      // count-ups
+      e.target.querySelectorAll('.n[data-count]').forEach(n => {
+        if (n.dataset.done) return; n.dataset.done = '1';
+        const target = parseFloat(n.dataset.count), suf = n.dataset.suf || '';
+        if (reduced || target === 0) { n.textContent = target + suf; return; }
+        let v = 0; const step = Math.max(1, Math.round(target / 28));
+        const t = setInterval(() => { v += step; if (v >= target) { v = target; clearInterval(t); } n.textContent = v + suf; }, 26);
+      });
+      secIo.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.sec').forEach(s => secIo.observe(s));
+
+  /* header solid + on-photo state */
+  const hdr = document.getElementById('hdr');
+  const heroes = Array.from(document.querySelectorAll('.hero'));
+  function onScroll() {
+    hdr.classList.toggle('solid', window.scrollY > 40);
+    const onPhoto = heroes.some(h => { const r = h.getBoundingClientRect(); return r.top <= 70 && r.bottom >= 70; });
+    hdr.classList.toggle('on-photo', onPhoto);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* QR role toggle (slide 4) */
+  const toggle = document.querySelector('.qr-toggle');
+  const rtP = document.getElementById('rtPersonal'), rtH = document.getElementById('rtHuesped'), badge = document.getElementById('qrBadge');
+  const MS = { personal: '184 ms', huesped: '172 ms' };
+  if (toggle) {
+    toggle.addEventListener('click', (ev) => {
+      const b = ev.target.closest('button'); if (!b) return;
+      toggle.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      const r = b.dataset.r;
+      rtP.classList.toggle('dim', r !== 'personal');
+      rtH.classList.toggle('dim', r !== 'huesped');
+      badge.textContent = 'Resuelto en ' + MS[r];
+    });
+  }
+})();
+</script>
+</body>
+</html>
